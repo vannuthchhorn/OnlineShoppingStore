@@ -96,6 +96,7 @@ namespace OnliceShoppingStore.Repository
         {
             _dbSet.Attach(entity);
             _DBEntity.Entry(entity).State = EntityState.Modified;
+            _DBEntity.SaveChanges();
         }
 
         public void UpdateByWhereClause(Expression<Func<Tbl_Entity, bool>> wherePredict, Action<Tbl_Entity> ForEachPridict)
@@ -113,6 +114,11 @@ namespace OnliceShoppingStore.Repository
             {
                 return _dbSet.OrderBy(orderByPredict).ToList();
             }
+        }
+
+        public IEnumerable<Tbl_Entity> GetProduct()
+        {
+            return _dbSet.ToList();
         }
     }
 }
