@@ -4,7 +4,16 @@
     ViewBag.Title = "ProductAdd";
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
-
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="../Admin/Dashboard">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="../Admin/Product">Product</a>
+    </li>
+    <li class="breadcrumb-item active">Product Add</li>
+</ol>
 <div class="container">
     @using (Html.BeginForm("ProductAdd", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
