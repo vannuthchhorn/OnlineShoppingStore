@@ -58,6 +58,7 @@ namespace OnliceShoppingStore.Controllers
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetFirstoreDefault(catId));
         }
+
         [HttpPost]
         public ActionResult CategoryEdit(Tbl_Category tbl)
         {
@@ -77,8 +78,16 @@ namespace OnliceShoppingStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProductAdd(Tbl_Product tbl)
+        public ActionResult ProductAdd(Tbl_Product tbl, HttpPostedFileBase file)
         {
+            string pic = null;
+            if (file != null)
+            {
+                pic = System.IO.Path.GetFileName(file.FileName);
+                string path = System.IO.Path.Combine(Server.MapPath("~/ProductImg/"), pic);
+                file.SaveAs(path);
+            }
+            tbl.ProductImage = file != null ? pic : tbl.ProductImage;
             tbl.CreateDate = DateTime.Now;
             _unitOfWork.GetRepositoryInstance<Tbl_Product>().Add(tbl);
             return RedirectToAction("Product");
