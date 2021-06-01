@@ -39,6 +39,7 @@ namespace OnliceShoppingStore.Controllers
         {
             return UpdateCategory(0);
         }
+
         public ActionResult UpdateCategory(int categoryId)
         {
             CategoryDetail cd;
@@ -51,10 +52,35 @@ namespace OnliceShoppingStore.Controllers
                 cd = new CategoryDetail();
             }
             return View("UpdateCategory", cd);
+
         }
+        public ActionResult CategoryEdit(int catId)
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Category>().GetFirstoreDefault(catId));
+        }
+        [HttpPost]
+        public ActionResult CategoryEdit(Tbl_Category tbl)
+        {
+            _unitOfWork.GetRepositoryInstance<Tbl_Category>().Update(tbl);
+            return RedirectToAction("Categories");
+        }
+
         public ActionResult Product()
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Product>().GetProduct());
+        }
+
+        public ActionResult ProductAdd()
+        {
+            ViewBag.CategoryList = GetCategory();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ProductAdd(Tbl_Product tbl)
+        {
+            _unitOfWork.GetRepositoryInstance<Tbl_Product>().Add(tbl);
+            return RedirectToAction("Product");
         }
 
         public ActionResult ProductEdit(int productId )
