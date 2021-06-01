@@ -79,6 +79,7 @@ namespace OnliceShoppingStore.Controllers
         [HttpPost]
         public ActionResult ProductAdd(Tbl_Product tbl)
         {
+            tbl.CreateDate = DateTime.Now;
             _unitOfWork.GetRepositoryInstance<Tbl_Product>().Add(tbl);
             return RedirectToAction("Product");
         }
@@ -92,6 +93,7 @@ namespace OnliceShoppingStore.Controllers
         [HttpPost]
         public ActionResult ProductEdit(Tbl_Product tbl)
         {
+            tbl.ModifiedDate = DateTime.Now;
             _unitOfWork.GetRepositoryInstance<Tbl_Product>().Update(tbl);
             return RedirectToAction("Product");
         }
