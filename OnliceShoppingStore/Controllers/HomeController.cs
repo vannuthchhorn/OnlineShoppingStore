@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnliceShoppingStore.Models.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,8 @@ namespace OnliceShoppingStore.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            HomeIndexViewModel model = new HomeIndexViewModel();
+            return View(model.CreatedModel());
         }
 
         public ActionResult About()
