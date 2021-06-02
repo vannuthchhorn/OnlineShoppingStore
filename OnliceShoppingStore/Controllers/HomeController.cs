@@ -9,10 +9,10 @@ namespace OnliceShoppingStore.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             HomeIndexViewModel model = new HomeIndexViewModel();
-            return View(model.CreatedModel());
+            return View(model.CreatedModel(search));
         }
 
         public ActionResult About()

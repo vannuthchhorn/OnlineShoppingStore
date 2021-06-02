@@ -12,12 +12,18 @@ namespace OnliceShoppingStore.Models.Home
     public class HomeIndexViewModel
     {
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+        dbMyOnlineShoppingEntities context = new dbMyOnlineShoppingEntities();
         public IEnumerable<Tbl_Product> ListOfProducts { get; set; }
-        public HomeIndexViewModel CreatedModel()
+        public HomeIndexViewModel CreatedModel(string search)
         {
+            SqlParameter[] param = new SqlParameter[]
+            {
+                new SqlParameter("@search", search??(object)DBNull.Value)
+            };
+            IEnumerable<Tbl_Product> data = context.Database.SqlQuery<Tbl_Product>("GetBySearch @search", param).ToList();
             return new HomeIndexViewModel
             {
-                ListOfProducts = _unitOfWork.GetRepositoryInstance<Tbl_Product>().GetAllRecords()
+                ListOfProducts = data
             };
         }
     }
