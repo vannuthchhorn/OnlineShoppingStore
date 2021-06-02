@@ -16,7 +16,7 @@
     <li class="breadcrumb-item active">Product Edit</li>
 </ol>
 <div class="container">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("ProductEdit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -109,7 +109,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 @*@Html.ActionLink("Back to List", "Product")*@
-                <a class="btn btn-danger" href="Product"><span>Back to Products List</span></a>
+                <a class="btn btn-danger" href="Product"><span>Back</span></a>
                 <input type="submit" value="Save" class="btn btn-info" />
             </div>
         </div>
