@@ -44,11 +44,20 @@ namespace OnliceShoppingStore.Controllers
             return Redirect("Index");
         }
 
-        public ActionResult Contact()
+        public ActionResult RemoveFromCart(int productId)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            List<Item> cart = (List<Item>)Session["cart"];
+            //var product = ctx.Tbl_Products.Find(productId);
+            foreach(var item in cart)
+            {
+                if (item.Product.ProductId == productId)
+                {
+                    cart.Remove(item);
+                    break;
+                }
+            }
+            Session["cart"] = cart;
+            return Redirect("Index");
         }
     }
 }
