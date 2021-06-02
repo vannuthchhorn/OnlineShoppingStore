@@ -12,7 +12,7 @@ namespace OnliceShoppingStore.Controllers
         public ActionResult Index(string search, int ? page)
         {
             HomeIndexViewModel model = new HomeIndexViewModel();
-            return View(model.CreatedModel(search, page));
+            return View(model.CreatedModel(search,4, page));
         }
 
         public ActionResult About()
