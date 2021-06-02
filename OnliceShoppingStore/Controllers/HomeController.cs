@@ -1,4 +1,5 @@
-﻿using OnliceShoppingStore.Models.Home;
+﻿using OnliceShoppingStore.DAL;
+using OnliceShoppingStore.Models.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,38 @@ namespace OnliceShoppingStore.Controllers
 {
     public class HomeController : Controller
     {
+        dbMyOnlineShoppingEntities ctx = new dbMyOnlineShoppingEntities();
         public ActionResult Index(string search, int ? page)
         {
             HomeIndexViewModel model = new HomeIndexViewModel();
             return View(model.CreatedModel(search,4, page));
         }
 
-        public ActionResult About()
+        public ActionResult AddToCart(int productId)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            if(Session["cart"] == null)
+            {
+                List<Item> cart = new List<Item>();
+                var product = ctx.Tbl_Products.Find(productId);
+                cart.Add(new Item()
+                {
+                    Product = product,
+                    Quantity = 1
+                });
+                Session["cart"] = cart;
+            }
+            else
+            {
+                List<Item> cart = (List<Item>)Session["cart"];
+                var product = ctx.Tbl_Products.Find(productId);
+                cart.Add(new Item()
+                {
+                    Product = product,
+                    Quantity = 1
+                });
+                Session["cart"] = cart;
+            }
+            return Redirect("Index");
         }
 
         public ActionResult Contact()

@@ -19,7 +19,12 @@ namespace OnliceShoppingStore.DAL
             : base("name=dbMyOnlineShoppingEntities")
         {
         }
-    
+
+        internal object Tbl_Product(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -31,7 +36,7 @@ namespace OnliceShoppingStore.DAL
         public virtual DbSet<Tbl_Category> Tbl_Category { get; set; }
         public virtual DbSet<Tbl_Member> Tbl_Member { get; set; }
         public virtual DbSet<Tbl_MemberRole> Tbl_MemberRole { get; set; }
-        public virtual DbSet<Tbl_Product> Tbl_Product { get; set; }
+        public virtual DbSet<Tbl_Product> Tbl_Products { get; set; }
         public virtual DbSet<Tbl_Role> Tbl_Role { get; set; }
         public virtual DbSet<Tbl_ShippingDetails> Tbl_ShippingDetails { get; set; }
         public virtual DbSet<Tbl_SlideImage> Tbl_SlideImage { get; set; }

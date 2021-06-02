@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using OnliceShoppingStore.Models.Home
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,7 +21,7 @@
                     <p>My Shop </p>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
+            @*<div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="logo">
                     <div class="account">
                         <ul>
@@ -36,7 +37,26 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div>*@
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Cart(3) <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        @if (Session["cart"] != null)
+                        {
+                            foreach (Item item in (List<Item>)Session["cart"])
+                            {
+                                <li>
+                                    <a href="@Url.Action("RemoveFromCart", "Home", new { productId=item.Product.ProductId})">@item.Product.ProductName (@item.Quantity) <i class="fa fa-times"></i></a>
+                                </li>
+                            }
+                        }
+                        <li class="divider"></li>
+                        <li><a href="@Url.Action("Checkout","Home")">Checkout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
         </div>
         <div class="row">
             <div class="col-md-12">
